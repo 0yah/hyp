@@ -9,7 +9,7 @@ export const Home = () => {
     const renderProducts = () => {
         return;
     }
-    return <div>
+    return <div className="homeLayout">
 
 
 

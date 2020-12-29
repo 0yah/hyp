@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@300&display=swap');
+     
+body{
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
+input{
+}
 #hideDesktop{
   display: none;
 }
-.products{
+.homeLayout .products{
   display: flex;
   flex-direction: row;
   gap:25px;
@@ -13,7 +21,7 @@
   overflow-x: scroll;
 }
 
-.products::-webkit-scrollbar{
+.homeLayout .products::-webkit-scrollbar{
   display: none;
 }
 .productCard{
@@ -62,7 +70,7 @@ nav ul li{
   font-size: 2em;
 }
 
-.controls{
+.navigation .controls{
   right: 0;
   gap: 0px;
 
@@ -162,6 +170,7 @@ nav ul li{
   flex-direction: column;
   left: 50%;
   transform: translate(-50%,0%);
+  padding: 1%;
   z-index: 1;
 }
 
@@ -199,7 +208,267 @@ nav ul li{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+.footerCategory{
+  display: flex;
+  margin: 5px;
+  flex-direction: column;
+}
+
+.footerCategory .title{
+  font-weight: bold;
+  font-size: 1.3em;
+  margin: 5px;
+}
 .socialMedia{
   display: flex;
   flex-direction: row;
+}
+
+.searchBox{
+  background-color: yellow;
+  justify-content: center;
+  height: 20vh;
+}
+
+.searchBox input{
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  padding: 1%;
+  height: 2vh;
+  width: 50vw;
+  outline: none;
+
+}
+
+
+.productLayout .searchContent{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  padding: 0%;
+  gap: 5px;
+  
+}
+.productLayout  .searchContent .filters{
+background-color: green;
+}
+
+.productLayout .searchContent .filters form{
+  
+  display: flex;
+  flex-direction: column;
+  }
+
+.filterBy{
+
+  margin: 5px;
+  font-weight: bold;
+  font-size: 1.4em;
+
+}
+
+
+.productLayout  .searchContent .content{
+  position: relative;
+  background-color: brown;
+  
+ 
+}
+.productLayout  .searchContent .content .controls{
+  margin: 5px;
+  position: relative;
+  right: 0;
+}
+
+.productLayout  .searchContent .content .products{
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 1%;
+
+  
+}
+
+.mobileNav{
+  display: none;
+}
+
+.detailsLayout{
+  position: relative;
+  left: 50%;
+  background-color: red;
+  padding: 1%;
+  transform: translate(-50%,0%);
+  width: 80vw;
+}
+
+.detailsLayout .content{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+
+}
+
+.descriptions .name{
+  font-size: 1.3em;
+}
+.descriptions .sizes{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.descriptions .sizes span{
+  border: 1px solid;
+  padding: 5px;
+}
+
+.addCart{
+  border: 1px solid;
+  padding: 5px;
+}
+.description{
+
+  font-size: 1.2em;
+}
+
+.cartLayout{
+  position: relative;
+  left: 50%;
+  padding: 1%;
+  transform: translate(-50%,0%);
+  width: 80vw;
+}
+
+.default{
+  height: 70vh;
+  background-color: rgba(254, 254, 254, 0.9);
+}
+
+.default .main{
+height: 50%;
+position: relative;
+
+}
+
+.default .main span{
+  position: absolute;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%,-50%);
+  font-size: larger;
+  font-weight: bold;
+}
+
+.default .products{
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 5px;
+}
+
+.default .products .product{
+  border: 1px solid;
+  height: 100%;
+  padding: 5px;
+  position: relative;
+}
+
+
+.default .products .product .media{
+  z-index: 0;
+  position: absolute;
+  top: 0;
+
+}
+
+.default .products .product .media img{
+  width: 100%;
+  height: auto;
+}
+
+
+.default .products .product .content{
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  
+
+}
+.cartItems{
+  display: flex;
+  flex-direction: column;
+}
+
+.cartItems .cartItem{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.cartItem .content{
+display: flex;
+flex-direction: column;
+gap: 5px;
+}
+
+.finish{
+  margin: 5px;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  
+gap: 5px;
+}
+
+.finish .shippingTitle{
+  font-size: 1.4em;
+  margin: 5px;
+  font-weight: bold;
+}
+.finish form{
+  display: grid;
+  gap: 10px;
+
+}
+
+.finish form input{
+  width: 25%;
+  padding: 1%;
+  
+}
+
+
+
+.quantity{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.contacts{
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+}
+
+.checkout{
+  border: 1px solid;
+  padding: 5px;
+  width: fit-content;
+}
+
+.country{
+  width: 27.5%;
+  padding: 1%;
+}
+
+.checkoutLayout{
+  position: relative;
+  left: 50%;
+  transform: translate(-50%,0%);
+  width: 80vw;
+  background-color: blueviolet;
 }

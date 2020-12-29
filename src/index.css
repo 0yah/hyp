@@ -1,11 +1,3 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 ::-webkit-scrollbar{
   display: none;
@@ -23,13 +15,9 @@ body {
     position: absolute;
     right: 0;
     padding: 5px;
-    background-color: yellow;
-    height: 80%;
-    width: 10%;
-    display: flex;
-    flex-direction: column;
     gap: 10px;
-    justify-content: center;
+    top: 50%;
+    transform: translate(0%,-50%);
   }
 
   .hamburger span{
@@ -222,4 +210,217 @@ body {
     display: grid;
     grid-template-columns: 1fr;
   }
+
+
+  .searchBox{
+    background-color: yellow;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .searchBox input{
+    position: static;
+    left: 0%;
+    top: 0%;
+    transform: translate(0%,0%);
+    padding: 1%;
+    height: 2vh;
+    width: 80vw;
+    outline: none;
+  
+  }
+  
+  
+  .productLayout .searchContent{
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0%;
+    gap: 5px;
+    
+  }
+  .productLayout  .searchContent .filters{
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  display: none;
+
+  }
+
+  .productLayout  .searchContent .filters .controls{
+    position: absolute;
+    right: 0;
+  }
+  .productLayout .searchContent .filters form{
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    }
+  
+  .filterBy{
+  
+    margin: 5px;
+    font-weight: bold;
+    font-size: 1.4em;
+  
+  }
+  
+  
+  .productLayout  .searchContent .content{
+    position: relative;
+    background-color: brown;
+    
+   
+  }
+  .productLayout  .searchContent .content .controls{
+    margin: 5px;
+    position: relative;
+    right: 0;
+  }
+  
+  .productLayout  .searchContent .content .products{
+  
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 1%;
+  
+    
+  }
+
+  .mobileNav{
+    display: none;
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 100%;
+
+    height: 100%;
+  }
+  .mobileNav nav ul{
+    flex-direction: column;
+    
+  }
+
+  .mobileNav .controls{
+    position: absolute;
+    top:0;
+    right: 0;
+    padding: 5px;
+  }
+
+
+  .detailsLayout{
+    position: relative;
+    left: 50%;
+    padding: 0%;
+    transform: translate(-50%,0%);
+    width: 100vw;
+  }
+  
+  .detailsLayout .content{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    padding: 10px;
+  
+  }
+  
+  .descriptions .name{
+    font-size: 1.3em;
+  }
+  .descriptions .sizes{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  
+  .descriptions .sizes span{
+    border: 1px solid;
+    padding: 5px;
+  }
+  
+  .addCart{
+    border: 1px solid;
+    padding: 5px;
+  }
+  .description{
+  
+    font-size: 1.2em;
+  }
+
+
+  
+.cartLayout{
+  position: relative;
+  left: 50%;
+  background-color: red;
+  padding: 0%;
+  transform: translate(-50%,0%);
+  width: 100vw;
+}
+
+.cartItems{
+  display: flex;
+  flex-direction: column;
+}
+
+.cartItems .cartItem{
+  grid-template-columns: 1fr 1fr;
+}
+
+.cartItem .content{
+display: flex;
+flex-direction: column;
+gap: 5px;
+}
+
+.finish{
+  margin: 5px;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+gap: 5px;
+}
+.finish form{
+  display: grid;
+  gap: 10px;
+
+}
+
+.finish form input{
+  width: inherit;
+  padding: 3%;
+  
+}
+
+.quantity{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.country{
+  width: inherit;
+  padding: 3%;
+}
+
+.default{
+  height: 70vh;
+}
+
+.default .products{
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  padding: 5px;
+}
+
 }

@@ -1,8 +1,9 @@
 import { AccountCircle, ShoppingCartOutlined } from "@material-ui/icons";
-
+import MenuIcon from '@material-ui/icons/Menu';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
-
+import CloseIcon from '@material-ui/icons/Close';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import $ from 'jquery';
 
 
 export const navigation = () =>{
@@ -38,10 +39,31 @@ export const navigation = () =>{
 
 
         </ul>
-        <div className="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div className="hamburger" id='hideDesktop' onClick={()=>{
+                    $('.mobileNav').css({
+                        display:'block'
+                    });
+            }}>
+            <MenuIcon/>
+        </div>
+
+        <div className='mobileNav' >
+            <nav>
+                <ul>
+                <li>Shirts</li>
+            <li>Caps & Hats</li>
+            <li>Bags</li>
+            <li>Shoes</li>
+            <li>Cart</li>
+                </ul>
+            </nav>
+            <div className='controls' onClick={()=>{
+                    $('.mobileNav').css({
+                        display:'none'
+                    });
+            }}>
+            <CloseIcon/>
+            </div>
         </div>
     </nav>
 </div>

@@ -6,43 +6,45 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 export const footer=()=>{
     return <div className='footerLayout'>
-        <div>
-            <nav>
-                <ul>
-                <li>Shop</li>
-                <li>Shirts</li>
-                <li>Caps & Hats</li>
-                <li>Bags</li>
-                <li>Shoes</li>
-                <li>Clearance</li>
+        <div className="footerCategory">
+                <span className="title">Shop</span>
+                <span>Shirts</span>
+                <span>Caps & Hats</span>
+                <span>Bags</span>
+                <span>Shoes</span>
+                <span>Clearance</span>
 
-                </ul>
-            </nav>
+        </div>
+        <div className="footerCategory">
+                <span className="title">Support</span>
+                <span>Refunds</span>
+                <span>Warranty</span>
+                <span>Order Status</span>
+                <span>F.A.Q</span>
+                
+        </div>
+        <div className="footerCategory">
+                <span className="title">About Us</span>
+                <span>Terms of sale</span>
+                <span>Careers</span>
+                
         </div>
         <div>
-            <nav>
-                <ul>
-                <li>Support</li>
-                <li>Refunds</li>
-                <li>Warranty</li>
-                <li>Order Status</li>
-                <li>F.A.Q</li>
-                </ul>
-            </nav>
-        </div>
-        <div>
-            <nav>
-                <ul>
-                <li>About Us</li>
-                <li>Terms of sale</li>
-                <li>Careers</li>
-                </ul>
-            </nav>
-        </div>
-        <div>
-            <span>Social</span>
+            <span >Social</span>
             <div className='socialMedia'>
-                <span></span>
+                <span>
+                    <LinkedInIcon/>
+                </span>
+                <span>
+                    <FacebookIcon/>
+                </span>
+                <span>
+                    <TwitterIcon/>
+                </span>
+
+                <span>
+                    <InstagramIcon/>
+                </span>
             </div>
         </div>
     </div>
