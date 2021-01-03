@@ -1,114 +1,177 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import 'react-native-gesture-handler';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useReducer,
+  useEffect,
+  useMemo,
+} from 'react';
+import auth from '@react-native-firebase/auth';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor, checkUser } from './redux'
+import { Provider, useDispatch } from 'react-redux';
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Home } from './components/Home';
+import { Favourite } from './components/Favourite';
+import { Profile } from './components/Profile';
+import { Login } from './components/Login';
+import { Splash } from './components/Splash';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
-const App: () => React$Node = () => {
+
+const App = () => {
+
+  const Stack = createStackNavigator();
+  const Tab = createBottomTabNavigator();
+
+  const [logged, setLogged] = useState(false);
+
+  store.subscribe(() => {
+
+    //Check if the user is logged in
+    //Since the state is stored asynchronously, subscribing to change will ensure that we detect auth changes as soon as they occur
+    var authState = store.getState().auth;
+    authState ? setLogged(true) : setLogged(false);
+
+  });
+
+  auth().onAuthStateChanged((user) => {
+
+    if (user) {
+      //console.log(user);
+      //store.dispatch();
+      var name = user.displayName;
+      var email = user.email;
+      var auth = user.uid;
+      var photo = user.photoURL;
+
+      ///console.log(result);
+
+      var data = {
+        name,
+        email,
+        auth,
+        photo
+      }
+     // console.log(data)
+      store.dispatch(checkUser(data));
+    } else {
+      var data = {
+        name: null,
+        email: null,
+        auth: null,
+        photo: null
+      }
+      store.dispatch(checkUser(data));
+    }
+
+  });
+
+  const HomeStack = () => {
+    return <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={({ navigator, route }) => ({
+          title: 'Home'
+        })}
+      />
+    </Stack.Navigator>
+  }
+
+
+  const CategoryStack = () => {
+    return <Stack.Navigator>
+      <Stack.Screen
+        component={Favourite}
+        name="Favourite"
+        options={({ navigator, route }) => ({
+          title: 'Favourite',
+          headerShown:false,
+        })}
+      />
+    </Stack.Navigator>
+  }
+
+
+  const ProfileStack = () => {
+    return <Stack.Navigator>
+      <Stack.Screen
+        component={Profile}
+        name="Profile"
+        options={({ navigator, route }) => ({
+          title: 'Profile'
+        })}
+      />
+    </Stack.Navigator>
+  }
+
+  const TabStack = () => {
+    return <Tab.Navigator
+      tabBarOptions={{
+        showLabel: false
+      }}>
+      <Tab.Screen name="Home" component={HomeStack}
+
+
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="md-home" color={color} size={size} />
+          ),
+        }}
+
+      />
+      <Tab.Screen name="Category" component={CategoryStack}
+
+
+        options={{
+
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="grid" color={color} size={size} />
+
+          ),
+        }}
+      />
+      <Tab.Screen name="Profile" component={ProfileStack} options={{
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ color, size }) => (
+          <SimpleLineIcons name="user" color={color} size={size} />
+
+        ),
+      }}
+      />
+    </Tab.Navigator>
+  }
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+
+
+    <NavigationContainer>
+      <Provider store={store}>
+        <PersistGate
+          persistor={persistor}
+          loading={<Splash />}
+        >
+          {console.log(logged)}
+          {logged ? TabStack() : <Login />}
+
+        </PersistGate>
+      </Provider>
+
+    </NavigationContainer>
+
   );
 };
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
+
 
 export default App;
