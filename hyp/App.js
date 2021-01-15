@@ -24,6 +24,8 @@ import { Favourite } from './components/Favourite';
 import { Profile } from './components/Profile';
 import { Login } from './components/Login';
 import { Splash } from './components/Splash';
+import { Add } from './components/Product/Add';
+import { Update } from './components/Product/Update';
 
 
 
@@ -61,7 +63,7 @@ const App = () => {
         auth,
         photo
       }
-     // console.log(data)
+      // console.log(data)
       store.dispatch(checkUser(data));
     } else {
       var data = {
@@ -95,7 +97,7 @@ const App = () => {
         name="Favourite"
         options={({ navigator, route }) => ({
           title: 'Favourite',
-          headerShown:false,
+          headerShown: false,
         })}
       />
     </Stack.Navigator>
@@ -104,11 +106,28 @@ const App = () => {
 
   const ProfileStack = () => {
     return <Stack.Navigator>
+
+<Stack.Screen
+        component={Add}
+        name="Add"
+        options={({ navigator, route }) => ({
+          title: 'New Product'
+        })}
+      />
+
       <Stack.Screen
         component={Profile}
         name="Profile"
         options={({ navigator, route }) => ({
           title: 'Profile'
+        })}
+      />
+
+      <Stack.Screen
+        component={Update}
+        name="Update"
+        options={({ navigator, route }) => ({
+          title: 'Edit Product'
         })}
       />
     </Stack.Navigator>
