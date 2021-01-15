@@ -17,7 +17,7 @@ import {Details} from './components/Details';
 import { Products } from './components/Products';
 import { footer } from './components/footer';
 import { CheckOut } from './components/CheckOut';
-
+import {Test} from './components/test';
 
 
 function App() {
@@ -71,6 +71,7 @@ function App() {
         <Route exact path="/cart" component={Cart}/>
         <Route exact path="/products" component={Products}/>
         <Route exact path="/checkout" component={CheckOut}/>
+        <Route component={Test}/>
   
       </Switch>
       {footer()}

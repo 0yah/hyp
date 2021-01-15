@@ -423,4 +423,25 @@ gap: 5px;
   padding: 5px;
 }
 
+.checkoutLayout{
+  width: 95vw;
+}
+
+.checkoutLayout .myCheckout{
+  
+  grid-template-columns: 1fr;
+  padding: 1%;
+}
+
+
+.payment{
+  padding: 1%;
+}
+
+.checkoutLayout .products{
+  
+  grid-template-columns: 1fr;
+  }
+
+
 }

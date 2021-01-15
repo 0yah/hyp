@@ -1,32 +1,32 @@
 import FilterListIcon from '@material-ui/icons/FilterList';
 import SearchIcon from '@material-ui/icons/Search';
 import $ from 'jquery';
-
 import CloseIcon from '@material-ui/icons/Close';
+
 export const Products = () => {
     return <div className="productLayout">
 
         <div className='searchBox'>
 
             <input placeholder="What are you looking for?" />
-            <div id="hideDesktop" onClick={()=>{
+            <div id="hideDesktop" onClick={() => {
                 $('.filters').css({
-                    display:'block'
+                    display: 'block'
                 });
             }}>
-            <SearchIcon/>
+                <SearchIcon />
             </div>
 
         </div>
         <div className="searchContent">
             <div className="filters">
 
-                <span className='controls' id="hideDesktop" onClick={()=>{
-                $('.filters').css({
-                    display:'none'
-                });
-            }}>
-<CloseIcon/>
+                <span className='controls' id="hideDesktop" onClick={() => {
+                    $('.filters').css({
+                        display: 'none'
+                    });
+                }}>
+                    <CloseIcon />
                 </span>
                 <span className="filterBy">
                     Price
@@ -138,11 +138,11 @@ export const Products = () => {
             </div>
             <div className="content">
                 <div className="controls">
-    <select>
-    <option>Popular</option>
-        <option>Low - High</option>
-        <option>High - Low</option>
-    </select>
+                    <select>
+                        <option>Popular</option>
+                        <option>Low - High</option>
+                        <option>High - Low</option>
+                    </select>
                 </div>
                 <div className="products">
                     <div className='productCard'>

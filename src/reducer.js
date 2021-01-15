@@ -21,6 +21,9 @@ export const initialContentState = {
     cart: [],
     mainAddress: '',
     otherAddress: '',
+    total:0,
+    country:'',
+    region:'',
 
 }
 
