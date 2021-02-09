@@ -6,7 +6,7 @@ export const AddProduct = () => {
     const [productName, setProductName] = useState();
     const [productDescription, setProductDescription] = useState();
     const [productPrice, setProductPrice] = useState();
-    const [productImage, setProductImage] = useState();
+    const [productImage, setProductImage] = useState(null);
     const [productCategory, setProductCategory] = useState();
     const [productSize, setProductSize] = useState();
     const [productSizes, setProductSizes] = useState([]);
@@ -69,20 +69,23 @@ export const AddProduct = () => {
     }, [])
     const newProduct = () => {
 
-        uploadImage(productName, productImage).then((downloadURL) => {
-            var data = {
-                Name: productName,
-                Price: productPrice,
-                Image: downloadURL,
-                Category: productCategory,
-                Description:productDescription
-            }
-            console.log(data)
-            addProduct(data);
-
-        }).catch((error) => {
-            console.log(error);
-        });
+        if(productImage!=null){
+            uploadImage(productName, productImage).then((downloadURL) => {
+                var data = {
+                    Name: productName,
+                    Price: productPrice,
+                    Image: downloadURL,
+                    Category: productCategory,
+                    Description:productDescription
+                }
+                console.log(data)
+                addProduct(data);
+    
+            }).catch((error) => {
+                console.log(error);
+            });
+    
+        }
 
 
     }
