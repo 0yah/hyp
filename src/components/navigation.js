@@ -5,9 +5,12 @@ import CloseIcon from '@material-ui/icons/Close';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import $ from 'jquery';
 
+import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { firestore, storage, clothRef } from "../firebase";
 
-export const navigation = () =>{
-
+export const HeaderNav = () =>{
+    let myNavigator = useHistory();
     return         <div className="navigation">
     <nav>
         <ul id='hideMobile'>
@@ -32,7 +35,9 @@ export const navigation = () =>{
                 <PersonOutlineOutlinedIcon />
             </li>
 
-            <li>
+            <li onClick={()=>{
+                window.location.href='/cart'
+            }}>
 
                 <ShoppingCartOutlined />
             </li>

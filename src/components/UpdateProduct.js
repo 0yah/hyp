@@ -1,12 +1,12 @@
-import { CodeSharp } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { firestore, storage, clothRef } from "../firebase";
-export const Test = () => {
+export const UpdateProduct = () => {
 
-    let currentLocation = useLocation()
+    let currentLocation = useLocation();
     let myNavigator = useHistory();
     const [productName, setProductName] = useState();
+    const [productID, setProductID] = useState();
     const [productPrice, setProductPrice] = useState();
     const [productImage, setProductImage] = useState();
     const [productCategory, setProductCategory] = useState();
@@ -34,18 +34,25 @@ export const Test = () => {
 
         }).catch((error) => {
             console.log(error);
-        })
+        });
+    }
+
+    const deleteProduct = () =>{
+        firestore.collection('Product').doc(productID).delete().then((result) => {
+            console.log(result);
+            myNavigator.goBack();
+
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
     const getProduct = () => {
         firestore.collection('Product').onSnapshot((result) => {
             var products = []
             result.forEach((re) => {
-                var product = re.data()
-                product.id = re.id;
-                 
-                //console.log(product)
-                products.push(product)
+                console.log(re.data())
+                products.push(re.data())
             })
             setProducts(products);
             console.log()
@@ -78,33 +85,21 @@ export const Test = () => {
         });
     }
     useEffect(() => {
-        getProduct()
 
-    }, [])
-    const newProduct = () => {
+        setProductCategory(currentLocation.state.Category);
+        setProductName(currentLocation.state.Name);
+        setProductPrice(currentLocation.state.Price);
+        setProductID(currentLocation.state.id);
+        console.log(currentLocation.state)
+    }, []);
 
-        uploadImage(productName, productImage).then((downloadURL) => {
-            var data = {
-                Name: productName,
-                Price: productPrice,
-                Image: downloadURL,
-                Category: productCategory
-            }
-            console.log(data)
-            addProduct(data);
-
-        }).catch((error) => {
-            console.log(error);
-        });
-
+    const modifyProduct = () =>{
 
     }
-
+    
     const renderProducts = () => {
         return products.map((product) => {
-            return <div onClick={()=>{
-                myNavigator.push(`/update/${product.id}`,product);
-            }}>{product.Name}</div>
+            return <div>{product.Name}</div>
         })
     }
 
@@ -133,7 +128,6 @@ export const Test = () => {
         })
     }
     return <div>
-        {renderProducts()}
 
         <form>
             <input type="text" placeholder="Product Name" value={productName} onChange={(e) => { setProductName(e.target.value) }} />
@@ -142,7 +136,7 @@ export const Test = () => {
 
 
             <input type="file" onChange={(e) => { setProductImage(e.target.files[0]) }} />
-            <select onChange={(e) => { setProductCategory(e.target.value) }}>
+            <select onChange={(e) => { setProductCategory(e.target.value) }} value={productCategory}>
             <option disabled selected>Category</option>
               
                 <option value="Shirts">Shirts</option>
@@ -151,8 +145,15 @@ export const Test = () => {
                 <option value="Shoes">Shoe</option>
             </select>
 
-            <button type='button' onClick={() => { newProduct() }}>
-                Add Product
+            <button type='button' onClick={() => { modifyProduct() }}>
+                Update Product
+            </button>
+
+            <button type="button" onClick={()=>{
+deleteProduct()
+            }}>
+
+                Delete Product
             </button>
         </form>
     </div>

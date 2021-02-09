@@ -4,11 +4,53 @@ import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined'
 
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { footer } from "./footer";
+import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { firestore, storage, clothRef } from "../firebase";
 export const Home = () => {
 
-    const renderProducts = () => {
-        return;
+    let currentLocation = useLocation()
+    let myNavigator = useHistory();
+    const [products, setProducts] = useState([]);
+  
+    const getProduct = () => {
+        firestore.collection('Product').onSnapshot((result) => {
+            var products = []
+            result.forEach((re) => {
+                var product = re.data()
+                product.id = re.id;
+                 
+                //console.log(product)
+                products.push(product)
+            })
+            setProducts(products);
+            console.log()
+        });
+
     }
+
+
+    const renderProducts = () => {
+        return products.map((product) => {
+            return <div className='productCard' onClick={()=>{
+                myNavigator.push(`/products/${product.id}`,product);
+                
+            }}>
+            <div className='media'>
+                <img src={product.Image} alt="Product Imag" />
+            </div>
+            <div className='content'>
+                <span>{product.Name}</span><span>{product.Category}</span>
+                <span>${product.Price}</span>
+            </div>
+        </div>
+        })
+    }
+
+    useEffect(() => {
+        getProduct()
+
+    }, [])
     return <div className="homeLayout">
 
 
@@ -65,65 +107,8 @@ export const Home = () => {
 
 
         <div className='products'>
-            <div className='productCard'>
-                <div className='media'>
-                    <img src="" alt="Product Imag" />
-                </div>
-                <div className='content'>
-                    <span>Product Name</span><span>Product Category</span>
-                    <span>Product Price</span>
-                </div>
-            </div>
 
-
-            <div className='productCard'>
-                <div className='media'>
-                    <img src="" alt="Product Imag" />
-                </div>
-                <div className='content'>
-                    <span>Product Name</span><span>Product Category</span>
-                    <span>Product Price</span>
-                </div>
-            </div>
-
-            <div className='productCard'>
-                <div className='media'>
-                    <img src="" alt="Product Imag" />
-                </div>
-                <div className='content'>
-                    <span>Product Name</span><span>Product Category</span>
-                    <span>Product Price</span>
-                </div>
-            </div>
-
-            <div className='productCard'>
-                <div className='media'>
-                    <img src="" alt="Product Imag" />
-                </div>
-                <div className='content'>
-                    <span>Product Name</span><span>Product Category</span>
-                    <span>Product Price</span>
-                </div>
-            </div>
-
-            <div className='productCard'>
-                <div className='media'>
-                    <img src="" alt="Product Imag" />
-                </div>
-                <div className='content'>
-                    <span>Product Name</span><span>Product Category</span>
-                    <span>Product Price</span>
-                </div>
-            </div>
-            <div className='productCard'>
-                <div className='media'>
-                    <img src="" alt="Product Imag" />
-                </div>
-                <div className='content'>
-                    <span>Product Name</span><span>Product Category</span>
-                    <span>Product Price</span>
-                </div>
-            </div>
+            {renderProducts()}
         </div>
 
         

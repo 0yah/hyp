@@ -1,12 +1,10 @@
-import { CodeSharp } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
-import { firestore, storage, clothRef } from "../firebase";
-export const Test = () => {
 
-    let currentLocation = useLocation()
-    let myNavigator = useHistory();
+import { firestore, storage, clothRef } from "../firebase";
+export const AddProduct = () => {
+
     const [productName, setProductName] = useState();
+    const [productDescription, setProductDescription] = useState();
     const [productPrice, setProductPrice] = useState();
     const [productImage, setProductImage] = useState();
     const [productCategory, setProductCategory] = useState();
@@ -16,44 +14,32 @@ export const Test = () => {
     const [productColour, setProductColour] = useState();
     const [productColours, setProductColours] = useState([]);
     const [products, setProducts] = useState([]);
-    const [uploadProgess, setUploadProgress] = useState(0);
+    const [uploadProgess, setUploadProgress] = useState(null);
+    const [uploadFile, setUploadFile] = useState(null);
 
 
     const addProduct = (data) => {
 
         firestore.collection('Product').add(data).then((result) => {
             console.log(result);
+
+            setProductName();
+            setProductPrice();
+            setProductImage(null);
+            setProductCategory(null);
+
+            setTimeout(()=>{
+                setUploadProgress(null);
+            },5000);
+
+
+
         }).catch((error) => {
             console.log(error);
         });
     }
 
-    const updateProduct = (id, data) => {
-        firestore.collection('Product').doc(id).update(data).then((result) => {
-            console.log(result);
-
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
-
-    const getProduct = () => {
-        firestore.collection('Product').onSnapshot((result) => {
-            var products = []
-            result.forEach((re) => {
-                var product = re.data()
-                product.id = re.id;
-                 
-                //console.log(product)
-                products.push(product)
-            })
-            setProducts(products);
-            console.log()
-        });
-
-    }
-
-
+    
 
     const uploadImage = (name, data) => {
         //console.log(name,data)
@@ -78,7 +64,7 @@ export const Test = () => {
         });
     }
     useEffect(() => {
-        getProduct()
+       // getProduct()
 
     }, [])
     const newProduct = () => {
@@ -88,7 +74,8 @@ export const Test = () => {
                 Name: productName,
                 Price: productPrice,
                 Image: downloadURL,
-                Category: productCategory
+                Category: productCategory,
+                Description:productDescription
             }
             console.log(data)
             addProduct(data);
@@ -100,13 +87,6 @@ export const Test = () => {
 
     }
 
-    const renderProducts = () => {
-        return products.map((product) => {
-            return <div onClick={()=>{
-                myNavigator.push(`/update/${product.id}`,product);
-            }}>{product.Name}</div>
-        })
-    }
 
     const renderProductColours = () => {
         return productColours.map((colour,index) => {
@@ -132,21 +112,26 @@ export const Test = () => {
             }}>{size}</span>
         })
     }
-    return <div>
-        {renderProducts()}
+    return <div className="addProduct">
 
         <form>
             <input type="text" placeholder="Product Name" value={productName} onChange={(e) => { setProductName(e.target.value) }} />
             <input placeholder="Product Price" value={productPrice} onChange={(e) => { setProductPrice(e.target.value) }} />
 
+            <input type="text" placeholder="Product Description" value={productDescription} onChange={(e) => { setProductDescription(e.target.value) }} />
+          
 
+            <input type="file" onChange={(e) => { setUploadFile(URL.createObjectURL(e.target.files[0])); setProductImage(e.target.files[0]); }} />
+            
+            <div className="preview">
+                <img src={uploadFile} alt={productName}/>
 
-            <input type="file" onChange={(e) => { setProductImage(e.target.files[0]) }} />
+            </div>
             <select onChange={(e) => { setProductCategory(e.target.value) }}>
             <option disabled selected>Category</option>
               
                 <option value="Shirts">Shirts</option>
-                <option value="Caps and Hats">Bags</option>
+                <option value="Caps and Hats">Caps & Hats</option>
                 <option value="Bags">Bag</option>
                 <option value="Shoes">Shoe</option>
             </select>
@@ -154,6 +139,7 @@ export const Test = () => {
             <button type='button' onClick={() => { newProduct() }}>
                 Add Product
             </button>
+            <span>{uploadProgess?`${uploadProgess}% Uploaded`:''}</span>
         </form>
     </div>
 }
