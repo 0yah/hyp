@@ -209,15 +209,31 @@ nav ul li{
   grid-template-columns: 1fr 1fr;
   position: relative;
   left: 50%;
-  gap: 5px;
+  gap: 20px;
   transform: translate(-50%,0%);
-  width: 80vw;
+  width: 50vw;
 
 }
 .newProductCard{
   background-color: white;
 
 }
+
+.newProductCard img{
+  
+  height: auto;
+  width: 100%;
+
+}
+
+
+.newProductCard .content{
+  text-align: center;
+  border: 1px solid black;
+  padding: 5px;
+  
+}
+
 
 
 .footerLayout{
@@ -245,9 +261,8 @@ nav ul li{
 }
 
 .searchBox{
-  background-color: yellow;
   justify-content: center;
-  height: 20vh;
+  height: 15vh;
 }
 
 .searchBox input{
@@ -259,6 +274,7 @@ nav ul li{
   height: 2vh;
   width: 50vw;
   outline: none;
+  border: 1px solid black;
 
 }
 
@@ -268,21 +284,28 @@ nav ul li{
   grid-template-columns: 1fr 4fr;
   padding: 0%;
   gap: 5px;
+  min-height: 75vh;
   
 }
 .productLayout  .searchContent .filters{
-background-color: green;
+
+padding: 20px;
+display: flex;
+flex-direction: column;
+gap: 15px;
+
 }
 
 .productLayout .searchContent .filters form{
   
   display: flex;
   flex-direction: column;
+  gap: 5px;
   }
 
 .filterBy{
 
-  margin: 5px;
+  margin: 10px;
   font-weight: bold;
   font-size: 1.4em;
 
@@ -291,7 +314,7 @@ background-color: green;
 
 .productLayout  .searchContent .content{
   position: relative;
-  background-color: brown;
+  width: 95%;
   
  
 }
@@ -299,6 +322,10 @@ background-color: green;
   margin: 5px;
   position: relative;
   right: 0;
+}
+
+.productLayout  .searchContent .content .controls select{
+  padding: 10px;
 }
 
 .productLayout  .searchContent .content .products{
@@ -318,7 +345,6 @@ background-color: green;
 .detailsLayout{
   position: relative;
   left: 50%;
-  background-color: red;
   padding: 1%;
   transform: translate(-50%,0%);
   width: 80vw;
@@ -331,12 +357,16 @@ background-color: green;
   gap: 5px;
 
 }
+.detailsLayout .content .media{
+  border: 1px solid black;
+}
 .detailsLayout .content .media img{
   height: auto;
   width: 100%;
 }
 .descriptions .name{
   font-size: 1.3em;
+  font-weight: bold;
 }
 .descriptions .sizes{
   display: flex;

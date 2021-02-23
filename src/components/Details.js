@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { firestore, storage, clothRef } from "../firebase";
 
-export const Details = () =>{
+export const Details = () => {
 
     let currentLocation = useLocation();
     let myNavigator = useHistory();
@@ -10,7 +10,7 @@ export const Details = () =>{
     const [productID, setProductID] = useState();
     const [productPrice, setProductPrice] = useState();
     const [productDescription, setProductDescription] = useState();
-    
+
     const [productImage, setProductImage] = useState();
     const [productCategory, setProductCategory] = useState();
     const [productSize, setProductSize] = useState();
@@ -46,22 +46,10 @@ export const Details = () =>{
                     {productDescription}
                 </p>
 
-                <div className='sizes'>
-                    <span>5</span>
-                    <span>5</span>
-                    <span>5</span>
-                </div>
-
-                <ul>
-                    <li>shjhjsd</li>
-                    <li>shjhjsd</li>
-                    <li>shjhjsd</li>
-                </ul>
-
-                    <span className='addCart'>
-                        Add to Cart
+                <span className='addCart'>
+                    Add to Cart
                     </span>
-                
+
             </div>
         </div>
     </div>

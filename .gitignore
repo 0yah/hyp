@@ -49,3 +49,8 @@ yarn-error.log*
 .firebaserc
 .eslintcache
 /src/firebase.js
+
+firestore.rules
+storage.rules
+firestore.indexes.json
+database.rules.json

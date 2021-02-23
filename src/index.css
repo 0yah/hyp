@@ -228,10 +228,9 @@
 
 
   .searchBox{
-    background-color: yellow;
     justify-content: center;
     align-items: center;
-    height: 10vh;
+    
     display: flex;
     flex-direction: row;
   }
@@ -241,12 +240,14 @@
     left: 0%;
     top: 0%;
     transform: translate(0%,0%);
-    padding: 1%;
+    padding: 10px;
     height: 2vh;
     width: 80vw;
     outline: none;
   
   }
+
+
   
   
   .productLayout .searchContent{
@@ -288,7 +289,8 @@
   
   .productLayout  .searchContent .content{
     position: relative;
-    background-color: brown;
+    left: 50%;
+    transform: translate(-50%,0%);
     
    
   }

@@ -15,6 +15,7 @@ export const Home = () => {
     let currentLocation = useLocation()
     let myNavigator = useHistory();
     const [products, setProducts] = useState([]);
+    const [newProducts, setNewProducts] = useState([]);
 
   
     const getProduct = () => {
@@ -28,6 +29,9 @@ export const Home = () => {
                 products.push(product)
             })
             setProducts(products);
+            console.log(products.slice(-1, -2))
+            var newProducts = products.reverse()
+            setNewProducts(newProducts);
             console.log()
         });
 
@@ -51,10 +55,24 @@ export const Home = () => {
         })
     }
 
+
+    const renderNewProducts = ()=>{
+
+        return newProducts.slice(0, 2).map((product,index)=>{
+            return <div className='newProductCard'>
+                <img src={product.Image} alt={product.Name} />
+            
+            <div className='content'>
+            <span>{product.Name}</span>
+            </div>
+    </div>
+        })
+
+    }
     useEffect(() => {
         getProduct()
 
-    }, [])
+    }, []);
     return <div className="homeLayout">
 
 
@@ -116,30 +134,11 @@ export const Home = () => {
         </div>
 
         <div className='newProducts'>
-        <div className='newProductCard'>
-                    <div className='media'>
-                        <img src='' alt="newProduct" />
-                    </div>
-                    <div className='content'>
-                        <span>
-                            Product Name
-                        </span>
-                    </div>
-            </div>
 
-            <div className='newProductCard'>
-                    <div className='media'>
-                        <img src='' alt="newProduct" />
-                    </div>
-                    <div className='content'>
-                        <span>
-                            Product Name
-                        </span>
-                    </div>
-            </div>
+            {renderNewProducts()}
+        
         </div>
         </div>
-{footer()}
 
     </div>
 }
