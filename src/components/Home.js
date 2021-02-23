@@ -7,11 +7,15 @@ import { footer } from "./footer";
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { firestore, storage, clothRef } from "../firebase";
+import bg from '../images/bg.jpg'
+import mobilebg from '../images/mobile-bg.jpg'
+
 export const Home = () => {
 
     let currentLocation = useLocation()
     let myNavigator = useHistory();
     const [products, setProducts] = useState([]);
+
   
     const getProduct = () => {
         firestore.collection('Product').onSnapshot((result) => {
@@ -31,7 +35,7 @@ export const Home = () => {
 
 
     const renderProducts = () => {
-        return products.map((product) => {
+        return products.slice(0, 4).map((product) => {
             return <div className='productCard' onClick={()=>{
                 myNavigator.push(`/products/${product.id}`,product);
                 
@@ -59,32 +63,11 @@ export const Home = () => {
 
 
         <div className='caurosel'>
-            <div className='item'>
-                <div></div>
 
-            </div>
-
-            <div className='item'>
-                2
-            </div>
-
-            <div className='item'>
-                3
-            </div>
-
-            <div className='item'>
-                <div className='media'>
-
-                </div>
-                <div className='content'>
-                    <span className='title'>
-                        Product Name
-                </span>
-                    <p>
-                        Product Descritpion
-                </p>
-                </div>
-            </div>
+                    <img src={bg} id="hideMobile"/>
+                    <img src={mobilebg} id="hideDesktop"/>
+                
+                
 
             <div className='left'>
 
@@ -109,6 +92,21 @@ export const Home = () => {
         <div className='products'>
 
             {renderProducts()}
+
+            <div className='productCard' id="hideMobile" onClick={()=>{
+                myNavigator.push(`/products`);
+                
+            }}>
+            <div className='viewMore' >
+             </div>
+        </div>
+        </div>
+
+        <div className="viewMorePopular"  id="hideDesktop" onClick={()=>{
+                myNavigator.push(`/products`);
+                
+            }}>
+            <span>View more</span>
         </div>
 
         

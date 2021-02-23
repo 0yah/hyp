@@ -134,9 +134,11 @@ export const AddProduct = () => {
             <option disabled selected>Category</option>
               
                 <option value="Shirts">Shirts</option>
+                <option value="Hoodie">Hoodie</option>
                 <option value="Caps and Hats">Caps & Hats</option>
                 <option value="Bags">Bag</option>
                 <option value="Shoes">Shoe</option>
+                <option value="Jacket">Jacket</option>
             </select>
 
             <button type='button' onClick={() => { newProduct() }}>

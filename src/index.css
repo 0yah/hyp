@@ -26,10 +26,21 @@
     background-color: black;
   }
   
+  .homeLayout .products{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:25px;
+    width: 95vw;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0%);
+    overflow-x: scroll;
+  }
 
   .products{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     gap:25px;
     width: 95vw;
     position: relative;
@@ -58,17 +69,23 @@
   
   .productCard .content{
    display: grid;
-   grid-template-columns: 1fr 1fr;
+   grid-template-columns: 1fr;
   }
   
   .navigation{
-    background-color: blue;
+    background-color: rgba(254, 254, 254, 0.9);
     position: sticky;
     top:0;
     z-index: 1;
+    margin-bottom: 0px;
+    
     
   }
   
+
+  
+
+
   .navigation nav ul{
     display: flex;
     flex-direction: row;
@@ -93,8 +110,6 @@
   .caurosel{
   
     position: relative;
-    background-color: red;
-    height: 70vh;
     overflow-x: scroll;
     left: 50%;
     transform: translate(-50%,0%);
@@ -441,6 +456,19 @@ gap: 5px;
 .checkoutLayout .products{
   
   grid-template-columns: 1fr;
+  }
+
+
+  
+  #hideMobile{
+    display: none;
+  }
+
+  .viewMorePopular{
+    margin: 10px;
+    text-align: center;
+    border: 1px solid black;
+    padding: 5px;
   }
 
 
