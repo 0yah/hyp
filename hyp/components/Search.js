@@ -1,4 +1,4 @@
-import {View, Image,Text} from 'react-native';
+import {View, Image, Text} from 'react-native';
 import React, {
   createContext,
   useState,
@@ -18,7 +18,7 @@ import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 const reference = storage().ref('Products');
 
-export const Home = () => {
+export const Search = () => {
   var items = [9, 9, 9, 88, 9];
   const globalState = store.getState();
 
@@ -41,37 +41,33 @@ export const Home = () => {
     return (
       <FlatList
         data={products}
-        
-  contentContainerStyle={{margin: 10,     backgroundColor:'white'}}
-  
+        contentContainerStyle={{margin: 10, backgroundColor: 'white'}}
         renderItem={(item) => {
-            console.log(item);
+          console.log(item);
           return (
-<View style={{
-     width: '100%',
-     height: 500,
-     borderColor:'black',
-     borderWidth:0.5,
-     margin:5,
-     backgroundColor:'white'
-     
-}}>
-      <Image source={{uri: item.item.Image }}
+            <View
+              style={{
+                width: '100%',
+                height: 500,
+                borderColor: 'black',
+                borderWidth: 0.5,
+                margin: 5,
+                backgroundColor: 'white',
+              }}>
+              <Image
+                source={{uri: item.item.Image}}
+                style={{width: '100%', height: '90%'}}
+              />
 
-            style={{width: '100%', height: '90%'}}
-            />
-
-<View style={{
-
-padding:1,
-margin:1
-}}>
-    <Text>{item.item.Name}</Text>
-    <Text>$ {item.item.Price}</Text>
-
-</View>
-      
-</View>
+              <View
+                style={{
+                  padding: 1,
+                  margin: 1,
+                }}>
+                <Text>{item.item.Name}</Text>
+                <Text>$ {item.item.Price}</Text>
+              </View>
+            </View>
           );
         }}
       />

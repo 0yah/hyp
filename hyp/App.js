@@ -26,6 +26,8 @@ import { Login } from './components/Login';
 import { Splash } from './components/Splash';
 import { Add } from './components/Product/Add';
 import { Update } from './components/Product/Update';
+import { Details } from './components/Details';
+import { Search } from './components/Search';
 
 
 
@@ -86,6 +88,15 @@ const App = () => {
           title: 'Home'
         })}
       />
+
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        options={({ navigator, route }) => ({
+          title: 'Item Name',
+
+        })}
+      />
     </Stack.Navigator>
   }
 
@@ -100,21 +111,22 @@ const App = () => {
           headerShown: false,
         })}
       />
+
+
+      <Stack.Screen
+        component={Search}
+        name="Search"
+        options={({ navigator, route }) => ({
+          title: 'Results',
+          headerShown: false,
+        })}
+      />
     </Stack.Navigator>
   }
 
 
   const ProfileStack = () => {
     return <Stack.Navigator>
-
-<Stack.Screen
-        component={Add}
-        name="Add"
-        options={({ navigator, route }) => ({
-          title: 'New Product'
-        })}
-      />
-
       <Stack.Screen
         component={Profile}
         name="Profile"
@@ -122,6 +134,15 @@ const App = () => {
           title: 'Profile'
         })}
       />
+
+      <Stack.Screen
+        component={Add}
+        name="Add"
+        options={({ navigator, route }) => ({
+          title: 'New Product'
+        })}
+      />
+
 
       <Stack.Screen
         component={Update}
@@ -136,16 +157,20 @@ const App = () => {
   const TabStack = () => {
     return <Tab.Navigator
       tabBarOptions={{
-        showLabel: false
-      }}>
+        showLabel: false,
+        activeTintColor: 'grey'
+      }}
+
+    >
       <Tab.Screen name="Home" component={HomeStack}
 
 
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="md-home" color={color} size={size} />
+            <Ionicons name="md-home" color={'black'} size={size} />
           ),
+
         }}
 
       />
@@ -154,17 +179,17 @@ const App = () => {
 
         options={{
 
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Category',
           tabBarIcon: ({ color, size }) => (
-            <Entypo name="grid" color={color} size={size} />
+            <Entypo name="grid" color={'black'} size={size} />
 
           ),
         }}
       />
       <Tab.Screen name="Profile" component={ProfileStack} options={{
-        tabBarLabel: 'Home',
+        tabBarLabel: 'Profile',
         tabBarIcon: ({ color, size }) => (
-          <SimpleLineIcons name="user" color={color} size={size} />
+          <SimpleLineIcons name="user" color={'black'} size={size} />
 
         ),
       }}

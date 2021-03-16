@@ -20,7 +20,7 @@ export const Favourite = () => {
 
 
 
-    var items = [{name:'Hat'}, {name:'Shoes'}, {name:'Hoodies'}, {name:'Trousers'},{name:'Shirts'},{name:'Jeans'},{name:'Jackets'},{name:'Bags'},{name:'Masks'},{name:'Undergarments'}]
+    var items = [{name:'Shirts',description:''}, {name:'Hoodie',description:''}, {name:'Hoodies',description:''}, {name:'Caps & Hats',description:''},{name:'Bag',description:''},{name:'Shoe',description:''},{name:'Jacket',description:''}]
     const globalState = store.getState();
 
     const renderItems = () => {
@@ -28,12 +28,20 @@ export const Favourite = () => {
 
         return <FlatList
             data={items}
-            renderItem={(item) => {
-                return  <List.Item
-                title={item.item.name}
-                description="Item description"
-                left={props => <Avatar.Image  {...props}  source={{ uri: 'https://picsum.photos/700' }} />}
-              />
+            renderItem={(data) => {
+                return  <View style={{
+                    borderWidth:2,
+                    padding:5,
+                    height:100,
+                    margin:5,
+                    justifyContent:'center'
+
+                }}>
+                    <Text style={{
+                        textAlign:'center',
+                        fontSize:20,
+                    }}>{data.item.name}</Text>
+                </View>
             }}
         />
 
@@ -65,18 +73,6 @@ export const Favourite = () => {
         
 
 
-        <View style={{
-
-            display: 'flex',
-            position:'relative',
-            top:0,
-            zIndex:1,
-            flex:1
-        }}>
-
-<Text>jjkkjjkjk</Text>
-
-        </View>
     </View>
 }
 
