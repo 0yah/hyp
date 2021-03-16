@@ -18,7 +18,7 @@ import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 const reference = storage().ref('Products');
 
-export const Home = () => {
+export const Home = ({navigation}) => {
   var items = [9, 9, 9, 88, 9];
   const globalState = store.getState();
 
@@ -31,6 +31,9 @@ export const Home = () => {
         let products = [];
         result.forEach((re) => {
           console.log(re.data());
+          let data= re.data();
+          data.id = re.id;
+          console.log(data);
           products.push(re.data());
         });
         setProducts(products);
@@ -44,9 +47,15 @@ export const Home = () => {
         
   contentContainerStyle={{margin: 10,     backgroundColor:'white'}}
   
+
         renderItem={(item) => {
-            console.log(item);
+          //  console.log(item);
           return (
+
+            <TouchableOpacity onPress={()=>{
+              console.log(navigation);
+              navigation.navigate('Details',item.item);
+            }}>
 <View style={{
      width: '100%',
      height: 500,
@@ -72,6 +81,8 @@ margin:1
 </View>
       
 </View>
+            </TouchableOpacity>
+
           );
         }}
       />

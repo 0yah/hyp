@@ -20,7 +20,7 @@ export const Favourite = () => {
 
 
 
-    var items = [{name:'Shirts',description:''}, {name:'Hoodie',description:''}, {name:'Hoodies',description:''}, {name:'Caps & Hats',description:''},{name:'Bag',description:''},{name:'Shoe',description:''},{name:'Jacket',description:''}]
+    var items = [{ name: 'Shirts', description: '' }, { name: 'Hoodie', description: '' }, { name: 'Hoodies', description: '' }, { name: 'Caps & Hats', description: '' }, { name: 'Bag', description: '' }, { name: 'Shoe', description: '' }, { name: 'Jacket', description: '' }]
     const globalState = store.getState();
 
     const renderItems = () => {
@@ -29,19 +29,24 @@ export const Favourite = () => {
         return <FlatList
             data={items}
             renderItem={(data) => {
-                return  <View style={{
-                    borderWidth:2,
-                    padding:5,
-                    height:100,
-                    margin:5,
-                    justifyContent:'center'
+                return (
+                    <TouchableOpacity>
+                        <View style={{
+                            borderWidth: 2,
+                            padding: 5,
+                            height: 100,
+                            margin: 5,
+                            justifyContent: 'center'
 
-                }}>
-                    <Text style={{
-                        textAlign:'center',
-                        fontSize:20,
-                    }}>{data.item.name}</Text>
-                </View>
+                        }}>
+                            <Text style={{
+                                textAlign: 'center',
+                                fontSize: 20,
+                            }}>{data.item.name}</Text>
+                        </View>
+
+                    </TouchableOpacity>
+                )
             }}
         />
 
@@ -49,8 +54,8 @@ export const Favourite = () => {
     }
 
     return <View style={{
-        flex:1,
-        display:'flex'
+        flex: 1,
+        display: 'flex'
     }}>
         <Searchbar
             placeholder="Search"
@@ -70,7 +75,7 @@ export const Favourite = () => {
         />
 
         {renderItems()}
-        
+
 
 
     </View>

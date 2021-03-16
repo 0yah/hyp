@@ -164,7 +164,6 @@ const App = () => {
     >
       <Tab.Screen name="Home" component={HomeStack}
 
-
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (

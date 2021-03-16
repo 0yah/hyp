@@ -45,7 +45,9 @@ export const Search = () => {
         renderItem={(item) => {
           console.log(item);
           return (
-            <View
+
+            <TouchableOpacity>
+ <View
               style={{
                 width: '100%',
                 height: 500,
@@ -68,6 +70,8 @@ export const Search = () => {
                 <Text>$ {item.item.Price}</Text>
               </View>
             </View>
+            </TouchableOpacity>
+           
           );
         }}
       />
